@@ -1,0 +1,82 @@
+package pers.jim.app;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+
+import javax.annotation.Resource;
+
+import org.aspectj.lang.JoinPoint;
+
+import pers.jim.app.annotation.AuthToken;
+
+
+//https://www.cnblogs.com/coderhuang/p/5994055.html
+public class AuthTokenAOPInterceptorTest {
+    
+//    @Resource
+//    private AppUserService appUserService;
+    
+    private static final String authFieldName = "authToken";
+    private static final String userIdFieldName = "userId";
+    
+    public void before(JoinPoint joinPoint) throws Throwable{
+        
+    	Class<?> s = joinPoint.getSignature().getDeclaringType(); //类
+    	String methodName=joinPoint.getSignature().getName(); //函数名
+    	Method[] methods=s.getMethods(); //函数列表
+    	AuthToken authToken =null;
+    	for(Method method : methods) {
+    		if(methodName.equals(method.getName())) { //确认函数入口；getMethod要确定其参数
+    	    	authToken = (AuthToken)method.getAnnotation(AuthToken.class); //获取其注解
+    	    	Parameter[] parameters = method.getParameters();  //参数列表
+    	    	for(Parameter p:parameters){
+    	    		System.out.println(p.getName()+"---"+p.getType());
+    	    	}
+    		}
+    	}
+    	
+        Object[] args =  joinPoint.getArgs(); //获取拦截方法的参数
+        boolean isFound = false;
+        for(Object arg : args){
+            if(arg != null){
+                Class<?> clazz = arg.getClass();//利用反射获取属性值
+                Field[]  fields =  clazz.getDeclaredFields();
+                int authIndex = -1;
+                int userIdIndex = -1;
+                for(int i = 0; i < fields.length; i++){
+                    Field field = fields[i];
+                    field.setAccessible(true);
+                    if(authFieldName.equals(field.getName())){//包含校验Token
+                        authIndex = i;
+                    }else if(userIdFieldName.equals(field.getName())){//包含用户Id
+                        userIdIndex = i;
+                    }
+                }
+                
+                if(authIndex >= 0 & userIdIndex >= 0){
+                    isFound = true;
+                    authTokenCheck(fields[authIndex], fields[userIdIndex], arg, authToken);//校验用户
+                    break;
+                }
+            }
+        }
+        if(!isFound){
+            throw new Exception("AuthToken Fail");
+        }
+        
+    }
+    
+    private void  authTokenCheck(Field authField, Field userIdField, Object arg, AuthToken authToken) throws Exception{
+        if(String.class == authField.getType()){
+//            String authTokenStr = (String)authField.get(arg);//获取到校验Token
+//            AppUser user = appUserService.getUserByAuthToken(authTokenStr);
+//            if(user != null){
+//                userIdField.set(arg, user.getId());
+//            }else{
+//            	throw new Exception("AuthToken Fail");
+//            }
+        }
+        
+    }
+}

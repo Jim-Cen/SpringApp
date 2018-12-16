@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">      
+<mapper namespace="pers.jim.app.mapper.ProgramMapper">
+    <select id="getProgram"  resultType="pers.jim.app.model.Program">
+        SELECT  program_id  	 AS programId,
+        	   	name 	 		 AS name,
+        	   	icon	 		 AS icon,
+        	   	href			 AS href,
+        	   	parent_id		 AS parentId,
+        	   	level			 AS level
+        FROM program
+        ORDER BY level,parent_id,program_id
+    </select>
+</mapper>

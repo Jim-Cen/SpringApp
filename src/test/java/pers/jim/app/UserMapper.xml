@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--  
+        <if test="userName != null">
+             AND  user_name=#{userName}
+        </if>
+        <if test="password != null">
+             AND  password=#{password}
+        </if>
+ -->       
+<mapper namespace="pers.jim.app.mapper.UserMapper">
+    <select id="getUserByName"  resultType="User">
+        SELECT  user_id  	 AS UserId,
+        	   	user_name 	 AS userName,
+        	   	password	 AS password
+        FROM user 
+        WHERE user_name=#{userName}
+    </select>
+</mapper>

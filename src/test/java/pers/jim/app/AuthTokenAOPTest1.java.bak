@@ -1,0 +1,60 @@
+package pers.jim.app;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import pers.jim.app.annotation.AuthToken;
+import pers.jim.app.business.AuthTokenService;
+
+
+//@Aspect
+@Component
+public class AuthTokenAOPTest1 {
+    
+	@Autowired
+    AuthTokenService authTokenService;
+    
+    private static final String authFieldName = "authToken";
+    private static final String userIdFieldName = "userId";
+    
+    @Pointcut("@annotation(pers.jim.app.annotation.AuthToken)")  
+    public void authTokenCheck(){}
+    
+    @Before("authTokenCheck()")
+    public void before(JoinPoint joinPoint) throws Throwable{
+        int authIndex = -1;
+        int userIdIndex = -1;
+    	Class<?> s = joinPoint.getSignature().getDeclaringType(); //类
+    	String methodName=joinPoint.getSignature().getName(); //函数名
+    	Method[] methods=s.getMethods(); //函数列表
+    	for(Method method : methods) {
+    		if(methodName.equals(method.getName())) { //确认函数入口；getMethod要确定其参数
+    	    	Parameter[] parameters = method.getParameters();  //参数列表
+    	    	for ( int i = 0; i < parameters.length; i++ ){
+    	    		if(authFieldName.equals(parameters[i].getName())) {
+    	    			authIndex = i;
+    	    		}
+    	    		if(userIdFieldName.equals(parameters[i].getName())) {
+    	    			userIdIndex = i;
+    	    		}
+                    if(authIndex >= 0 && userIdIndex >= 0) {
+                    	break;
+                    }
+    	    	}
+    		}
+    	}
+        Object[] args =  joinPoint.getArgs(); //获取拦截方法的参数
+        if ( authIndex < 0 || userIdIndex < 0) {
+        	throw new Exception("Fail to Auth");
+        }
+        authTokenService.authTokenCheck(args[authIndex], args[userIdIndex]);
+    }
+}

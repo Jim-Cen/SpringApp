@@ -1,0 +1,29 @@
+package pers.jim.app;
+
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import pers.jim.app.business.UserService;
+import pers.jim.app.mapper.UserMapper;
+import pers.jim.app.model.User;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class AppApplicationTests {
+	@Autowired
+	UserMapper userMapper;
+	
+	@Autowired
+	UserService userService;
+	
+	@Test
+	public void Test() {
+		Assert.assertTrue(userService.checkPassword("Jim", "1"));
+	}
+
+}

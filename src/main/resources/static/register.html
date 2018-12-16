@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>系统注册</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="App">
+  <meta name="author" content="Jim">
+
+  <link rel="icon" href="assets/img/favicon.ico" />
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/md5.min.js"></script>
+  <script src="assets/js/custom-script.js"></script>
+  <script src="assets/js/register.js"></script>
+  <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+  <link href="assets/css/register.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="loading">
+  <div>
+    <span class="fa fa-spinner fa-spin fa-5x fa-fw"></span>
+  </div>
+</div>
+  <!-- <div class="step-bar">
+    <ul>
+      <li>
+        <div class="number active">1</div>
+        <div class="text">账号基本</div>
+      </li>
+      <li>
+        <div class="number">2</div>
+        <div class="text">用户基本</div>
+        <div class="line"></div>
+      </li>
+      <li>
+        <div class="number">3</div>
+        <div class="text">用户详细</div>
+        <div class="line"></div>
+      </li>
+    </ul>
+  </div> -->
+  <h1>注册新用户</h1>
+  <form>
+    <div class="account-setup register-form" style="left: calc(50% - 175px);">
+      <!-- <h2>账号基本</h2> -->
+      <input  id="name" type="text" placeholder="*账号名">
+      <input  id="password" type="password" placeholder="*密码">
+      <input  id="confirmPassword" type="password" placeholder="*确认密码">
+      <div class="error-text"></div>
+      <div onclick="window.location.replace('login.html')" class="button">首页</div>
+      <div id="regBtn" class="button firstNext">注册</div>
+    </div>
+    <!-- <div class="user-details register-form" style="left: 4000px;">
+      <h2>用户基本</h2>
+      <input name="full_name" type="text" placeholder="全名">
+      <input name="counrty" type="text" placeholder="国籍">
+      <input name="city" type="text" placeholder="城市">
+      <div class="button firstPrev">上一步</div>
+      <div class="button secondNext">下一步</div>
+    </div>
+    <div class="finish-step register-form" style="left: 4000px;">
+      <h2>用户详细</h2>
+      <label for="birth-day">出生日期</label>
+      <input name="birth-day" type="date">
+      <label class="accept-conditions" for="accept">接受
+         <a href="www.baidu.com">
+          协议和规定
+        </a>
+        <input name="accept" type="checkbox">
+      </label>
+      <div class="button secondPrev">上一步</div>
+      <div class="button disabled">注册</div>
+    </div> -->
+  </form>
+</body>
+
+</html>

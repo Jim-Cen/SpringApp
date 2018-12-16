@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>系统登陆</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="App">
+    <meta name="author" content="Jim">
+
+	  <link rel="icon" href="assets/img/favicon.ico" />
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/md5.min.js"></script>
+    <script src="assets/js/custom-script.js"></script>
+    <script src="assets/js/login.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="assets/css/login.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="cont">
+    <div class="demo">
+      <div class="login">
+        <div class="login__check">钻石生产系统</div>
+        <div class="login__form">
+          <div class="login__row">
+            <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
+              <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8"></path>
+            </svg>
+            <input type="text" class="login__input name" id="name" placeholder="姓名">
+          </div>
+          <div class="login__row">
+            <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
+              <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0"></path>
+            </svg>
+            <input type="password" class="login__input pass" id="password" placeholder="密码">
+          </div>
+          <button type="button" class="login__submit">登录</button>
+          <p class="login__signup">没有账号? &nbsp;
+            <a href="register.html">注册</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <p>Copyright &copy; 2018.Company name All rights reserved.</p>
+      <p>ICP证粤XX-XXXXXXXX 粤公网安备 XXXXXXXXXXXXXX</p>
+    </div>
+  </div>
+
+  <div class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header alert alert-warning">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title">登录失败</h4>
+          </div>
+          <div class="modal-body alert alert-danger">
+            <h3>账号或者密码不正确</h3>
+          </div>
+          <div class="modal-footer alert alert-warning">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
